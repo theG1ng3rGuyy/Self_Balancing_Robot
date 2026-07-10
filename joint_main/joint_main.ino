@@ -91,10 +91,12 @@ void set_Speed(int speed){
     digitalWrite(IN4,LOW);
     digitalWrite(IN2,LOW);
   }
+  else
+  {
   speed = abs(speed);
-  Serial.println("Speed1:"+String(speed));
   analogWrite(IN2,speed);
   analogWrite(IN4,speed);
   digitalWrite(IN1,LOW);
   digitalWrite(IN3,LOW);  
+  }
 }
