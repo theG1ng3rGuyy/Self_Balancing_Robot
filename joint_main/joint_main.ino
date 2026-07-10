@@ -70,7 +70,7 @@ float PID_Motor(float ER) {
 
   output = ER * Kp + Integral * Ki + derivattive * Kd;
 
-  return (int16_t) constrain(output,-255,255);// antiwindup (clamping)
+  return (int16_t) constrain(output,-255,255);// antiwindup (clamping) and 
 }
 
 
@@ -84,13 +84,15 @@ float error()
 }
 
 void set_Speed(int speed){
+  Serial.println("Speed:"+String(speed));
   if (speed >= 0){
     analogWrite(IN1,speed); // teste wellcher richtung 
     analogWrite(IN3,speed);
     digitalWrite(IN4,LOW);
     digitalWrite(IN2,LOW);
   }
-
+  speed = abs(speed);
+  Serial.println("Speed1:"+String(speed));
   analogWrite(IN2,speed);
   analogWrite(IN4,speed);
   digitalWrite(IN1,LOW);
