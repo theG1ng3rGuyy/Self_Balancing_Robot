@@ -8,9 +8,9 @@ float MS;        // real value measure
 int16_t output;
 const int16_t MAX_OUTPUT = 255;
 
-float Kp;
-float Ki;
-float Kd;
+float Kp = 2;
+float Ki = 0.1;
+float Kd = 0;
 
 float derivattive;
 float Integral;
@@ -59,7 +59,7 @@ float PID_Motor(float ER) {
   unsigned long now = millis();             // Zeit seit Programstart
   dt = (float)(now - last_Time) / 1000.0f;  // dt berechhnen in Sekunden
   last_Time = now;                          //eventuell millis();
-  Serial.println(dt);                       // debug
+ // Serial.println(dt);                       // debug
 
 
   Integral += ER * dt;  // kumulierte summe
@@ -77,7 +77,9 @@ float PID_Motor(float ER) {
 float error()
 {
   IMU::read(); //why
+  Serial.println(IMU::getPitch());
   ER = setpoint - IMU::getPitch(); // noch nicht  fertig 
+  Serial.println("Error:"+String(ER));
   return ER;
 }
 
@@ -89,8 +91,8 @@ void set_Speed(int speed){
     digitalWrite(IN2,LOW);
   }
 
-  analogWrite(IN2,-speed);
-  analogWrite(IN4,-speed);
+  analogWrite(IN2,speed);
+  analogWrite(IN4,speed);
   digitalWrite(IN1,LOW);
   digitalWrite(IN3,LOW);  
 }
