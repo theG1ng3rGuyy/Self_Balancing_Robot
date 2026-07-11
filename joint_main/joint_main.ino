@@ -8,9 +8,9 @@ float MS;        // real value measure
 int16_t output;
 const int16_t MAX_OUTPUT = 255;
 
-float Kp = 2;
-float Ki = 0.1;
-float Kd = 0;
+float Kp = 20;
+float Ki = 0;
+float Kd = 2;
 
 float derivattive;
 float Integral;
