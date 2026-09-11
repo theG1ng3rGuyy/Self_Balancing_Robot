@@ -105,7 +105,7 @@ public:
 private:
   static uint32_t lastProcessed;
 
-  static int16_t  accelX, accelY, accelZ;
+  static int16_t accelX, accelY, accelZ;
   static int16_t gyroX, gyroY, gyroZ;
   
   static double kalXAngle, kalYAngle;
