@@ -17,21 +17,25 @@ void loop() {
   Serial.println("VX:" +String(getVX(IMU::getPitch(),IMU::getRawAccelX())));
 }
 
-float getVX(float pitch, float ares){
+
+float getVX(float pitch, float ares)
+{
   // get velocity through integral 
   unsigned long now = millis();
 
   dt = (now - last_Time) / 1000.0f;
   ares= (float)ares / 16384.0f * 9.81f;
   float ax = ares * cos(pitch);
+  if( abs(ax) < 0.04 ) ax=0;
+
   Serial.println("dt:"+String(dt));
   Serial.println("ax:"+String(ax));
-  //Serial.println("DT:");
-  //Serial.print(dt);
+  Serial.println("ares:"+String(ares));
+  Serial.println("pitch:"+String(pitch));
+
   last_Time = now;
   static float Vx;
   Vx += ax * dt;
+  Serial.println("Vx:"+String(Vx));
   return Vx;
-
-
 }
